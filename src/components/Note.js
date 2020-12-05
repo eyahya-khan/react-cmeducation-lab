@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Container,
@@ -9,8 +9,14 @@ import {
   Accordion,
   Card,
 } from "react-bootstrap";
+import { getNotes } from "./notes";
 
 function Note() {
+  const [selectedNote, setSelectedNote] = useState(undefined);
+  const onSelectNote = (note) => {
+    setSelectedNote(note);
+  };
+
   return (
     <div>
       <Container>
@@ -29,11 +35,16 @@ function Note() {
               New note
             </Button>
             <ListGroup>
-              <ListGroup.Item action>Cras justo odio</ListGroup.Item>
-              <ListGroup.Item action>Dapibus ac facilisis in</ListGroup.Item>
-              <ListGroup.Item action>Morbi leo risus</ListGroup.Item>
-              <ListGroup.Item action>Porta ac consectetur ac</ListGroup.Item>
-              <ListGroup.Item action>Vestibulum at eros</ListGroup.Item>
+              {getNotes().map((note) => (
+                <ListGroup.Item
+                  active={selectedNote ? note.id === selectedNote.id : false}
+                  onClick={() => onSelectNote(note)}
+                  as="li"
+                  key={note.id}
+                >
+                  {note.title}
+                </ListGroup.Item>
+              ))}
             </ListGroup>
           </Col>
           <Col>
