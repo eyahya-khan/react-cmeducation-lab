@@ -9,14 +9,13 @@ import {
   Accordion,
   Card,
 } from "react-bootstrap";
-import { getNotes } from "./notes";
+import { getNotes } from "./notes111";
 
 function Note() {
   const [selectedNote, setSelectedNote] = useState(undefined);
   const onSelectNote = (note) => {
     setSelectedNote(note);
   };
-
   return (
     <div>
       <Container>
